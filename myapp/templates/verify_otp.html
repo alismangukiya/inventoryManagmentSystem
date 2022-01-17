@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Login/Registration Form Transition</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'><link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="cont">
+  <div class="form sign-in" style="margin-left:15%;margin-top:10%;align:center">
+    <h2>We just sent OTP to your given email address. Please verify it...</h2>
+    <form method="POST" action="{% url 'otp' %}" id="otpfm">
+      {% csrf_token %}
+      <label>
+        <span>Enter OTP here </span>
+        <input type="text" name="uotp"/>
+        <input type="hidden" name="otp" value={{otp}}>
+      </label>
+      <button type="submit" class="submit" id="ver">Verify</button>
+      
+    </form>
+  </div>
+</div>
+</body>
+</html>

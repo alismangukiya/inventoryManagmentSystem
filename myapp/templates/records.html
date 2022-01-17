@@ -1,0 +1,200 @@
+<!--
+=========================================================
+* Argon Dashboard - v1.2.0
+=========================================================
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+
+
+* Copyright  Creative Tim (http://www.creative-tim.com)
+* Coded by www.creative-tim.com
+
+
+
+=========================================================
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css'%}" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+</head>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner" style="height:60%">
+      <!-- Brand -->
+      <div class="sidenav-header  align-items-center">
+        <h1 style="color: #5E72E4; font-family: 'Great Vibes', cursive; font-size: 50px; line-height: 20px; font-weight: bold; margin-bottom: 0px; margin-top: 40px; text-align: center; text-shadow: 0 1px 1px #fff; ">
+          IMS
+        </h1>
+        <div style="height:40px;width:100%"></div>
+        <p>Inventory Management System</p>
+      </div>
+      <div class="navbar-inner">
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+          <!-- Nav items -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item  active">
+              <a class="nav-link" href="{% url 'items' %}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Add Items</span>
+              </a>
+            </li>
+            <li class="nav-item  active">
+              <a class="nav-link" href="{% url 'updateitems' %}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Update Items</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'search' %}">
+                <i class="ni ni-pin-3 text-primary"></i>
+                <span class="nav-link-text">Search</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'record' %}">
+                <i class="ni ni-bullet-list-67 text-default"></i>
+                <span class="nav-link-text">Records</span>
+              </a>
+            </li>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Search Items</h6>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row justify-content-center">
+        <div class=" col ">
+          <div class="card">
+            {% if form %}
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Sell this item</h3>
+            </div>
+            <div class="card-body">
+                {{form}}
+              </div>
+
+              {% else %}
+              <div class="row align-items-center py-4">
+                <div class="card-header col-lg-5 col-7 bg-transparent d-inline-block" style="padding-left:100px">
+              <h3 class="mb-0">Items</h3>
+            </div>
+          </div>
+
+            
+
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Iteam name</th>
+                    <th scope="col">Item description</th>
+                    <th scope="col">quantity</th>
+                    <th scope="col">customer name</th>
+                    <th scope="col">phone</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <th scope="row">{{item.id}}</th>
+                            <td>{{item.itemName}}</td>
+                            <td>{{item.itemDesc}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.customerName}}</td>
+                            <td>{{item.phone}}</td>
+                            <td>{{item.username}}</td>
+                            <td>{{item.amount}}</td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            </div>              {% endif %}
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6">
+            <p id='msg' style="text-align: center;">{{msg}}</p>
+          </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+              <li class="nav-item"> 
+                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+     </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  
+
+  </script>
+  <script src="{% static '/vendor/jquery/dist/jquery.min.js'%}"></script>
+  <script src="{% static '/vendor/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static '/vendor/js-cookie/js.cookie.js'%}"></script>
+  <script src="{% static '/vendor/jquery.scrollbar/jquery.scrollbar.min.js'%}"></script>
+  <script src="{% static '/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js'%}"></script>
+  <!-- Optional JS -->
+  <script src="{% static 'vendor/clipboard/dist/clipboard.min.js'%}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js?v=1.2.0'%}"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</html>

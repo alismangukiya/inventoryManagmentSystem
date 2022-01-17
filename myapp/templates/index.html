@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Login/Registration Form Transition</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'><link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="cont">
+  <div class="form sign-in">
+    <h2>Time to feel like home,</h2>
+    <form method="POST" action="{% url 'index' %}" id="signup">
+      {% csrf_token %}
+      <label>
+        <span>First Name </span>
+        <input type="text" name="first_name"/>
+      </label>
+
+      <label>
+        <span>Last name </span>
+        <input type="text" name="last_name"/>
+      </label>
+      
+      
+      
+      <label>
+        <span>Email</span>
+        <input type="email" name="username"/>
+      </label>
+
+      <label>
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" name="password"/>
+      </label>
+      <button type="submit" class="submit" id="sub">Sign Up</button>
+
+      {% if messages %}
+            {% for message in messages %}
+                <div style="color:red;text-align:center;font-size : 10px" {% if message.tags %} class="{{ message.tags}}" {% endif %} >
+                     <p style="font-size:18px;"> (-_-) {{ message }} (-_-)</p>
+            
+                    </div>
+             {% endfor %}
+     {% endif %}
+      
+    </form>
+    {% comment %} <form method="POST" id="otpform">
+      {% csrf_token %}
+      <label>
+        <span>Enter otp here... </span>
+        <input type="text" id="uotp" name="otp"/>
+      </label>
+      <button type="button" class="submit" onclick="validateOTP()">Sign Up</button>
+      
+    </form>
+    
+     {% endcomment %}
+    
+    
+    
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--in">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
+      </div>
+      <div class="img__text m--up">
+        <h2>One of us?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn" id="a">
+        <span class="m--up">Sign IN</span>
+        <span class="m--in">Sign UP</span>
+
+              </div>
+    </div>
+
+    <div class="form sign-up">
+      <h2>Welcome Back,</h2>
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <label>
+          <span>Username</span>
+          <input type="text" name='id'/>
+        </label>
+        <label>
+          <span>Password</span>
+          <input type="password" name='pwd'/>
+        </label>
+        <button type="submit" class="submit">Sign In</button>
+        {% if messages %}
+            {% for message in messages %}
+                <div style="color:red;text-align:center;font-size : 10px" {% if message.tags %} class="{{ message.tags}}" {% endif %} >
+                     *{{ message }}
+                    <button type="button" class="close" id="override-start" data-dismiss="alert"
+                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+            {% endfor %}
+        {% endif %}
+      </form>
+      <p class="forgot-pass">Forgot password?</p>
+          
+    
+    
+  </div>
+  </div>
+</div>
+<script>
+var check="{{error}}"
+if(check=="true"){
+  alert("User already exist!")
+}
+
+</script>
+
+{% comment %} <script type="text/javascript"> 
+  function validateOTP(){
+    var uotp=document.getElementById("uotp").value;
+    if(uotp=="{{otp}}"){
+      alert("User created");
+    }
+    else{
+      alert("Invalid otp");
+    }
+  }
+  var a = "{{otp}}";
+  if(a!=""){
+    document.getElementById("otpform").style.display="block"; 
+    document.getElementById("signup").style.display="none";
+  }
+  else
+  {
+    document.getElementById("otpform").style.display="none";
+    document.getElementById("signup").style.display="block";  
+  }
+</script> {% endcomment %}
+<!-- partial -->
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
